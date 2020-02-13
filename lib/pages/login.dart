@@ -1,11 +1,34 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart';
+import 'package:woogerente/const/const.dart';
+import 'package:woogerente/services/request.dart';
+import 'productsScreen.dart';
 
 class Login extends StatefulWidget {
+
   @override
   _LoginState createState() => _LoginState();
 }
 
+
 class _LoginState extends State<Login> {
+
+void initState() {
+  super.initState();
+  getProducts();
+  
+}
+
+void getProducts() async {
+  Products products = Products(url: url, username: username, password: key);
+  var productsData = products.getData();
+  print(productsData);
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return ProductsScreen(productsData: productsData);
+  }));
+}
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
