@@ -3,7 +3,7 @@ import 'package:woogerente/pages/login.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'const/const.dart';
-import 'pages/productsScreen.dart';
+import 'pages/dashboard_screen.dart';
 import 'services/request.dart';
 
 
@@ -18,19 +18,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
- void initState() {
-    super.initState();
-    getProducts();
-  }
-
-  void getProducts() async {
-    Products products = Products(url: url, username: username, password: key);
-    var productsData = products.getData();
-    print(productsData);
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ProductsScreen(productsData: productsData);
-    }));
-  }
 
   @override
   Widget build(BuildContext context) {

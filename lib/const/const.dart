@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 const url = 'https://apiwoocommerce.000webhostapp.com/wp-json/wc/v3/products';
 const username = 'ck_6775e5536ea6249efa58df159ba818e9b46b6bee';
 const key =  'cs_9e79b67da60337e6f13bdd453560a2a1b6ed4eea';
- 
+
 
 //  Future requisicao () async {
 

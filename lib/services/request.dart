@@ -1,7 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 
-
+import 'package:http/io_client.dart';
 
 class Products {
 
@@ -12,10 +13,12 @@ class Products {
   final String password;
 
   Future getData()async {
+    HttpClient client = new HttpClient()..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+    var ioClient = new IOClient(client);
     String basicAuth =
       'Basic ' + base64Encode(utf8.encode('$username:$password'));
   print(basicAuth);
-    http.Response response = await http.get(url,
+    http.Response response = await ioClient.get(url,
       headers: <String, String>{'authorization': basicAuth});
 
     if (response.statusCode == 200) {
