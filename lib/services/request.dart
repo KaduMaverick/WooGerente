@@ -12,16 +12,28 @@ class Products {
   final String username;
   final String password;
 
-  Future getData()async {
-    HttpClient client = new HttpClient()..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
-    var ioClient = new IOClient(client);
+  // Future accessAPI() async {
+  //   HttpClient client = new HttpClient()..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+  //   var ioClient = new IOClient(client);
+  //   String basicAuth =
+  //       'Basic ' + base64Encode(utf8.encode('$username:$password'));
+  //   print(basicAuth);
+  //   http.Response response = await ioClient.get(url,
+  //       headers: <String, String>{'authorization': basicAuth});
+  //    return response.statusCode;
+  // }
+
+  Future getData() async {
+//    HttpClient client = new HttpClient()..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+//    var ioClient = new IOClient(client);
     String basicAuth =
       'Basic ' + base64Encode(utf8.encode('$username:$password'));
-  print(basicAuth);
-    http.Response response = await ioClient.get(url,
+      print('entrei');
+    http.Response response = await http.get(url,
       headers: <String, String>{'authorization': basicAuth});
-
+    print(response.statusCode);
     if (response.statusCode == 200) {
+      print('entrei');
       String data = response.body;
       var decodedData = jsonDecode(data);
       print(decodedData);
