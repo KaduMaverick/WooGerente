@@ -1,6 +1,5 @@
 import 'package:mobx/mobx.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:woogerente/services/request.dart';
 part 'login.g.dart';
 
 class Login = _LoginBase with _$Login;
@@ -21,6 +20,18 @@ abstract class _LoginBase with Store {
       return null;
     }else if (!validateAPI(apiEndPoint)){
       return 'Website invalido';
+    }
+  }
+
+  bool animationTrigger (){
+    bool validateAPI(endpoint) {
+      RegExp urlPattern = new RegExp("(http:\/\/|https:\/\/)");
+      return urlPattern.hasMatch(endpoint);
+    }
+    if(apiEndPoint == null || apiEndPoint.isEmpty ){
+      return false;
+    }else if (!validateAPI(apiEndPoint)){
+      return true;
     }
   }
 
