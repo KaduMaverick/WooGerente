@@ -6,6 +6,8 @@ class Login = _LoginBase with _$Login;
 
 abstract class _LoginBase with Store {
 
+  final storage = new FlutterSecureStorage();
+
   @observable
   String apiEndPoint;
   @action
@@ -62,7 +64,6 @@ abstract class _LoginBase with Store {
   }
 
   Future<bool> readStorageLogin()async{ 
-    final storage = new FlutterSecureStorage();
       Map<String, String> allValues = await storage.readAll();
       if(allValues['loginAPI'] == null && allValues['loginUSER'] == null && allValues['loginChaveAPI'] == null){
         return false;
@@ -70,4 +71,11 @@ abstract class _LoginBase with Store {
         return true;
       }   
   }
+
+  void saveLoginToStorage(){
+    storage.write(key: 'loginAPI', value: apiEndPoint);
+    storage.write(key: 'loginUSER', value: user);
+    storage.write(key: 'loginChaveAPI', value: chaveApi);
+  }
+  
 }
